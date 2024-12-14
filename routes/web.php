@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Dashboard\PostJobController;
+use App\Http\Controllers\Dashboard\PostServiceController;
 use App\Models\Job;
 
 
@@ -23,15 +25,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/message', [App\Http\Controllers\Dashboard\getMessageController::class, 'index']);
 
     //services
-    Route::get('/dashboard/service', [ServiceController::class, 'index'])->name('services.index');
-    Route::delete('/dashboard/services/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
-    Route::get('/dashboard/service/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::get('/dashboard/service', [PostServiceController::class, 'index'])->name('services.index');
+    Route::delete('/dashboard/services/{id}', [PostServiceController::class, 'destroy'])->name('services.destroy');
+    Route::get('/dashboard/service/create', [PostServiceController::class, 'create'])->name('services.create');
+    Route::post('/dashboard/service/store', [PostServiceController::class, 'store'])->name('services.store');
 
     //jobs
-    Route::get('/dashboard/job', [JobController::class, 'index'])->name('jobs.index');
-    Route::delete('/dashboard/jobs/{id}', [JobController::class, 'destroy'])->name('jobs.destroy');
-    Route::get('/dashboard/job/create', [JobController::class, 'create'])->name('jobs.create');
-    Route::get('/dashboard/job/store', [JobController::class, 'store'])->name('jobs.store');
+    Route::get('/dashboard/job', [PostJobController::class, 'index'])->name('jobs.index');
+    Route::delete('/dashboard/jobs/{id}', [PostJobController::class, 'destroy'])->name('jobs.destroy');
+    Route::get('/dashboard/job/create', [PostJobController::class, 'create'])->name('jobs.create');
+    Route::post('/dashboard/job/store', [PostJobController::class, 'store'])->name('jobs.store');
 
 
 
@@ -79,7 +82,7 @@ Route::get('/', function () {
 });
 Route::get('/home', [MainPageController::class, 'home'])->name('home');
 Route::get('/about', [MainPageController::class, 'about'])->name('about');
-Route::get('/service', [MainPageController::class, 'service'])->name('service');
+Route::get('/service', [ServiceController::class, 'index'])->name('service');
 
 //job
 Route::get('/job', [JobController::class, 'index'])->name('job');

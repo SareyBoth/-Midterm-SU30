@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
 mix.sass('resources/sass/app.scss', 'public/css')
-   .options({
-       processCssUrls: false
-   })
-   .version(); // For cache busting in production
+    .options({
+        processCssUrls: false,
+    })
+    .version(); // For cache busting in production

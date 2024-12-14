@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('logo');
             $table->string('service_name');
-            $table->string('company');
+            $table->string('location');
             $table->integer('price');
-            $table->string('service');
+            $table->string('country');
             $table->string('detail');
         });
     }

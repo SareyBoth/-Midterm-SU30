@@ -9,7 +9,7 @@ class JobController extends Controller
     public function index()
     {
         // Paginate the jobs and display 6 items per page
-        $jobs = Job::paginate(6);
+        $jobs = Job::orderBy('id', 'desc')->paginate(6);
         
         // Pass the paginated job data to the view
         return view('main.job', compact('jobs'));
